@@ -1,2 +1,4 @@
 Flask
 Gunicorn
+google==3.0.0
+autosuggest==1.0.0
