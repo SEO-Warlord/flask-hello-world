@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Autosuggest Flask App</title>
+  </head>
+  <body>
+    <h1>Google Autosuggest Flask App</h1>
+    <form>
+      <input type="text" name="query" id="query" placeholder="Enter a query...">
+      <button type="button" onclick="get_suggestions()">Get Suggestions</button>
+    </form>
+    <ul id="suggestions"></ul>
+    <script>
+      function get_suggestions() {
+        var query = document.getElementById("query").value;
+        fetch(`/get_autosuggest?query=${query}`)
+          .then(response => response.json())
+          .then(data => {
+            var suggestions = data.suggestions;
+            var suggestions_list = document.getElementById("suggestions");
+            suggestions_list.innerHTML = "";
+            suggestions.forEach(function(suggestion) {
+              var suggestion_item = document.createElement("li");
+              suggestion_item.appendChild(document.createTextNode(suggestion));
+              suggestions_list.appendChild(suggestion_item);
+            });
+          });
+      }
+    </script>
+  </body>
+</html>
